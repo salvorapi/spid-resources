@@ -7,9 +7,9 @@
 
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#"
     schemaLocation="http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd"/>
-  <xs:element name="SpIdentity" type="md:spVerifiedIndentity"/>
+  <xs:element name="SpIdentity" type="md:spVerifiedIdentity"/>
 
-  <xs:complexType name="spVerifiedIndentity">
+  <xs:complexType name="spVerifiedIdentity">
     <xs:sequence>
       <xs:element ref="ds:Signature" minOccurs="0"/>
       <xs:element name="idpCode" type="xs:string"/>
