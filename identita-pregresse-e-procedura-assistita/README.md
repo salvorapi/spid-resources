@@ -136,7 +136,7 @@ Si riporta come esempio una SAMLResponse di test (pretty printed):
 
     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <saml2p:Response xmlns:saml2p="urn:oasis:names:tc:SAML:2.0:protocol" ID="..." IssueInstant="..." Version="2.0">
-        <saml2:Issuer xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">https://test-sp.poste.it</saml2:Issuer>
+        <saml2:Issuer xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">...</saml2:Issuer>
         <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
         <SignedInfo>
             <CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
@@ -247,7 +247,7 @@ Il significato degli attributi:
 
 -   **idpCode**  riporta il codice univoco dell'IDP che invia la risposta cioe' quello indicato nell'attributo idpCode nei metadata dell'idp
 -   **responseID**  e' valorizzato con il valore dell'attributo ID della SAMLRespone inviata dall'SP
--   **result**  riporta un codice di esito dell'operazione (fare riferimento a  [tabella-messaggi-spid-v1.2.pdf](doc/integrazione-sp/tabella-messaggi-spid-v1.2.pdf))
+-   **result**  riporta un codice di esito dell'operazione (fare riferimento a  [tabella-messaggi-spid-v1.2.pdf](https://github.com/italia/spid-resources/blob/master/identita-pregresse-e-procedura-assistita/doc/tabella-messaggi-spid-v1.2.pdf))
 -   **fiscalCode**,  **name**  e  **familyName**  riportano i dati anagrafici dell'utente registrato e attivato.  **Questi attributi sono valorizzati solo in caso di risposte con esito positivo che corrispondono ai codici "ErrorCode nr100"=registrazione presa in carico per la risposta sincrona e "ErrorCode nr25"=identita' attivata per la risposta asincrona**  e se  **idReuseProfileType=verified**  in tutti gli altri casi non saranno valorizzati.
 
 Nel caso in cui l'SP dichiari  **idReuseProfileType=notverified**  l'xsd che descrive la risposta asincrona e' il seguente (in sostanza non riporta nessun attributo i cui valori possano ricondurre all'utente) e scaricabile da [spid-idreusenotverified-result.xsd](https://github.com/italia/spid-resources/blob/master/identita-pregresse-e-procedura-assistita/xsd/spid-idreusenotverified-result.xsd).
