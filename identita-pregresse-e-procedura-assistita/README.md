@@ -54,7 +54,7 @@ i metadati devono essere firmati da chi li emette in questo caso l'IDP le inform
 
 il metadata e' firmato secondo lo standard  [xmldsig](https://www.w3.org/TR/xmldsig-core1/)  e deve essere trustato dall'SP.
 
-Si riporta lo schema XSD con cui l'IdP puo' generare il metadata e scaricabile  [xsd metadata sp](xsd/spid-id-reuse-metadata-idp.xsd)
+Si riporta lo schema XSD con cui l'IdP puo' generare il metadata e scaricabile  [xsd metadata sp](https://github.com/italia/spid-resources/blob/master/identita-pregresse-e-procedura-assistita/xsd/spid-idreusemetadata-idp.xsd)
 
 ## Metadata SP
 In maniera analoga l'SP deve esporre i propri metadati (si riporta un esempio di un gestore di identita' pregresse di test).
@@ -113,7 +113,7 @@ le informazioni che l'SP deve popolare sono
     -   **spEncryptionCert**  riporta codificato in Base64 il certificato (X509) collegato alla chiave privata con cui l'SP decifra le risposte dell'IDP
 
 il metadata deve essere firmato secondo lo standard  [xmldsig](https://www.w3.org/TR/xmldsig-core1/)  e trustato dall'IDP
-Si riporta lo schema XSD con cui l'SP puo' generare il metadata e scaricabile  [xsd metadata sp](xsd/spid-id-reuse-metadata-sp.xsd).
+Si riporta lo schema XSD con cui l'SP puo' generare il metadata e scaricabile  [xsd metadata sp](https://github.com/italia/spid-resources/blob/master/identita-pregresse-e-procedura-assistita/xsd/spid-idreusemetadata-sp.xsd).
 
 ### Invio della SAMLResponse verso l'IDP
 Il processo di migrazione dell'identita' inizia con l'invio dell'SP di una SAMLResponse che contiene gli attributi che qualificano l'utente (fare riferimento alla documentazione funzionale per i domini dei valori)
@@ -190,9 +190,11 @@ Si riporta come esempio una SAMLResponse di test (pretty printed):
     </saml2:EncryptedAssertion>
     </saml2p:Response>
 
-La response deve essere generata secondo gli standard definiti in  [saml 2.0 core](https://docs.oasis-open.org/security/saml/v2.0/)
+La response deve essere generata secondo gli standard definiti in  [saml 2.0 core](https://docs.oasis-open.org/security/saml/v2.0/).
 
-La saml response deve essere codifica in base64 e inviata in HTTP-POST all'endpoint indicato in idpEndpointResponse nei metadata dell'IDP
+Si riporta lo schema XSD con cui l'SP puo' generare il metadata e scaricabile  [saml-schema-protocol-2.0](https://github.com/italia/spid-resources/blob/master/identita-pregresse-e-procedura-assistita/xsd/saml-schema-protocol-2.0.xsd).
+
+La saml response deve essere codifica in base64 e inviata in HTTP-POST all'endpoint indicato in idpEndpointResponse nei metadata dell'IDP.
 
 Questo deve essere fatto attraverso una pagina autopostante eseguita dallo user-agent in sessione sull'SP es:
 
@@ -221,7 +223,7 @@ L'IDP puo' inviare due tipi di risposte verso l'SP quelle sincronre veicolate da
 
 Le risposte sincrone vengono inviate all'endpoint  **spInfoPage**  indicato nei metadata dell'IDP e quelle asincrone all'endpoint indicato in  **spEndpointResult**  sempre nei metadati dell'IDP
 
-Tutte le risposte devono rispettare il seguente schema: ([spid-id-reuse-verified-result.xsd](xsd/spid-id-reuse-verified-result.xsd)).
+Tutte le risposte devono rispettare il seguente schema: ([spid-idreuseverified-result.xsd](https://github.com/italia/spid-resources/blob/master/identita-pregresse-e-procedura-assistita/xsd/spid-idreuseverified-result.xsd)).
 
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:md="http://spid.gov.it/spIdentity/verified/result"  xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://spid.gov.it/spIdentity/verified/result" version="1.0"> 
@@ -248,7 +250,7 @@ Il significato degli attributi:
 -   **result**  riporta un codice di esito dell'operazione (fare riferimento a  [tabella-messaggi-spid-v1.2.pdf](doc/integrazione-sp/tabella-messaggi-spid-v1.2.pdf))
 -   **fiscalCode**,  **name**  e  **familyName**  riportano i dati anagrafici dell'utente registrato e attivato.  **Questi attributi sono valorizzati solo in caso di risposte con esito positivo che corrispondono ai codici "ErrorCode nr100"=registrazione presa in carico per la risposta sincrona e "ErrorCode nr25"=identita' attivata per la risposta asincrona**  e se  **idReuseProfileType=verified**  in tutti gli altri casi non saranno valorizzati.
 
-Nel caso in cui l'SP dichiari  **idReuseProfileType=notverified**  l'xsd che descrive la risposta asincrona e' il seguente (in sostanza non riporta nessun attributo i cui valori possano ricondurre all'utente) e scaricabile da [spid-id-reuse-not-verified-result.xsd](xsd/spid-id-reuse-not-verified-result.xsd).
+Nel caso in cui l'SP dichiari  **idReuseProfileType=notverified**  l'xsd che descrive la risposta asincrona e' il seguente (in sostanza non riporta nessun attributo i cui valori possano ricondurre all'utente) e scaricabile da [spid-idreusenotverified-result.xsd](https://github.com/italia/spid-resources/blob/master/identita-pregresse-e-procedura-assistita/xsd/spid-idreusenotverified-result.xsd).
 
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:md="http://spid.gov.it/spIdentity/notverified/result" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://spid.gov.it/spIdentity/notverified/result" version="1.0">
